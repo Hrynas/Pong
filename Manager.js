@@ -32,6 +32,8 @@ function Manager () {
 
 
 
+
+
 		
 		this.deleteCache = new Array()
 		
@@ -43,9 +45,10 @@ function Manager () {
 
 
 
-
-
 		setInterval('g_Manager.updateLoop()', 1000/this.iMaxFramesPerSecond)
+
+
+
 		
 
 
@@ -68,6 +71,7 @@ function Manager () {
 }
 
 Manager.prototype = new Update;
+
 
 
 

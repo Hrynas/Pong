@@ -4,7 +4,6 @@ function Update() {
 	
 
 	this.startupUpdate = function() {
-
 		
 
 	}
@@ -12,9 +11,13 @@ function Update() {
 
 	this.updateLoop = function () {
 
+
+
+
 		//clear canvas
 		// this.context.clearRect(0,0, g_Manager.canvas.width, g_Manager.canvas.height)
-		this.context.fillRect(0,0, g_Manager.canvas.width, g_Manager.canvas.height)
+		g_Manager.context.fillRect(0,0, g_Manager.canvas.width, g_Manager.canvas.height)
+
 
 		//show FPS and find dt (elapsed time between frames)
 		// this.context.fillText('FPS: ' + this.iFramesPerSecond, 0, 20)
@@ -34,11 +37,8 @@ function Update() {
 		this.dt = (this.currentFrameTime - this.lastFrameTime) / 1000
 		this.lastFrameTime = this.currentFrameTime
 
-		if (this.dt > 0.05) {
-			console.log(this.dt)
-			this.dt = 0.01
-		}
-		
+
+
 
 
 		//Update and draw
@@ -50,35 +50,23 @@ function Update() {
 		// }
 		// this.deleteCache = new Array()
 		
-		// console.log(this.deleteCache)
-		
+
+
+
 		for (x in this.gameObjects) {
-			
+
 			if (this.gameObjects[x].update) {
 				this.gameObjects[x].update()
 			}
-
-		}
-
-
-
-
-		for (x in this.gameObjects) {
 			
 			if (this.gameObjects[x].draw) {
-				this.gameObjects[x].draw(this.context)
+				this.gameObjects[x].draw(g_Manager.context)
 			}
 
 		}
 
 
 		
-
-		
-
-
-
-
 	}
 
 
