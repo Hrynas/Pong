@@ -5,8 +5,12 @@ function PlayerBar () {
 		this.x = 0
 		this.y = 0
 		this.zOrder = 0
+		this.height = 50
+		this.width = 10
 
 		this.image = i_playerBar
+
+		this.bounceEnable = true
 
 		g_Manager.canvas.addEventListener('mousemove', this.update, false);
 

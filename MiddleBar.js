@@ -6,11 +6,15 @@ function MiddleBar () {
 		this.x = g_Manager.canvas.width / 2
 		this.y = 0
 		this.zOrder = 0
+		this.height = 400
+		this.width = 10
 		this.drawEnable = false
 		this.startCountdownDraw = true
 
 		this.image = i_middleBar
 		this.currentTimeMiddleBar = new Date().getTime()
+
+		this.bounceEnable = false
 
 		g_Manager.addGameObject(this)
 
@@ -29,6 +33,7 @@ function MiddleBar () {
 				this.currentTimeMiddleBar = new Date().getTime()
 				this.startCountdownDraw = false
 				this.drawEnable = true
+				this.bounceEnable = true
 			}
 
 		}
@@ -40,6 +45,7 @@ function MiddleBar () {
 				this.currentTimeMiddleBar = new Date().getTime()
 				this.startCountdownDraw = true
 				this.drawEnable = false
+				this.bounceEnable = false
 			}		
 			
 

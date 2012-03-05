@@ -5,8 +5,12 @@ function EnemyBar () {
 		this.x = g_Manager.canvas.width - 10
 		this.y = g_Manager.canvas.height / 2
 		this.zOrder = 0
+		this.height = 50
+		this.width = 10
 
 		this.image = i_playerBar
+
+		this.bounceEnable = true
 
 		// g_Manager.canvas.addEventListener('mousemove', this.update, false);
 

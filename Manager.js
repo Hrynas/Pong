@@ -7,7 +7,7 @@ function Manager () {
 
 
 
-	this.startupManager = function(){
+	this.startupManager = function() {
 		
 		g_Manager = this
 		this.gameObjects = new Array(2)
