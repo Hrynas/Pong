@@ -9,7 +9,7 @@ function Ball () {
 		this.height = 10
 		this.width = 10
 		this.xDirection = -1
-		this.yDirection = 0
+		this.yDirection = -1
 
 		this.speed = 200
 		this.lastHit = null
@@ -69,10 +69,54 @@ function Ball () {
 						this.y <= g_Manager.gameObjects[x].y + g_Manager.gameObjects[x].height &&
 						this.lastHit !== g_Manager.gameObjects[x]
 					) {
+
+						if (g_Manager.gameObjects[x].image === i_playerBar) {
+							
+							this.xDirection = this.xDirection * -1
+							
+
+
+							this.ballCenterX = this.x + this.width / 2
+							this.ballCenterY = this.y + this.height / 2
+
+
+							this.barMeasure = g_Manager.gameObjects[x].height / 5
+
+							if (this.ballCenterY >= g_Manager.gameObjects[x].y + this.barMeasure &&
+								this.ballCenterY <= g_Manager.gameObjects[x].y + g_Manager.gameObjects[x].height - this.barMeasure
+
+
+
+							) {
+								console.log('middle')
+								this.yDirection = (Math.random() * (0.5 - 0.1) + 0.1) * -1
+								
+							}
+
+							else {
+								console.log('edge')
+								this.yDirection = (Math.random() * (1 - 0.5) + 0.5)
+
+							}
+
+
+
+							this.lastHit = g_Manager.gameObjects[x]
+
+
+							break
+
+						}
+
+						else {
+
+							this.xDirection = this.xDirection * -1
+							this.lastHit = g_Manager.gameObjects[x]
+							break
+
+						}
 						
-						this.xDirection = this.xDirection * -1
-						this.lastHit = g_Manager.gameObjects[x]
-						break
+
 						
 					}
 				}

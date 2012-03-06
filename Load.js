@@ -21,13 +21,3 @@ i_enemyBar.src = "img/middle_bar.jpg"
 var i_ball = new Image()
 i_ball.src = "img/ball.jpg"
 
-requestAnimFrame = (function() {
-  return window.requestAnimationFrame ||
-     window.webkitRequestAnimationFrame ||
-     window.mozRequestAnimationFrame ||
-     window.oRequestAnimationFrame ||
-     window.msRequestAnimationFrame ||
-     function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
-       window.setTimeout(callback, 1000/60);
-     };
-})();
