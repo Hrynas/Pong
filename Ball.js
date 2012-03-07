@@ -12,6 +12,7 @@ function Ball () {
 		this.yDirection = 0
 
 		this.speed = 300
+		this.speedIncrease = 25
 		this.lastHit = null
 
 		this.previousX = -100
@@ -36,11 +37,6 @@ function Ball () {
 		this.x += g_Manager.dt * this.speed * this.xDirection
 		this.y += g_Manager.dt * this.speed * this.yDirection
 
-
-
-
-
-
 		for (x in g_Manager.gameObjects) {
 
 			if (g_Manager.gameObjects[x].bounceEnable) {
@@ -53,20 +49,18 @@ function Ball () {
 						this.y <= g_Manager.gameObjects[x].y + g_Manager.gameObjects[x].height &&
 						this.lastHit !== g_Manager.gameObjects[x]
 					) {
-
+	
 						if (g_Manager.gameObjects[x].image === i_enemyBar) {
-							this.xDirection = this.xDirection * -1
 							this.directionTemp = (Math.random() * (0.5 - 0.1) + 0.1)
 							if (this.yDirection > 0) {this.yDirection = this.directionTemp}
 							else {this.yDirection = this.directionTemp * -1}
-							this.lastHit = g_Manager.gameObjects[x]
-							break
+							this.speed = this.speed + this.speedIncrease
 						}
-						else {
-							this.xDirection = this.xDirection * -1
-							this.lastHit = g_Manager.gameObjects[x]
-							break
-						}
+						else {}
+
+						this.lastHit = g_Manager.gameObjects[x]
+						this.xDirection = this.xDirection * -1
+						break
 					}
 				}
 
@@ -80,10 +74,10 @@ function Ball () {
 					) {
 
 						if (g_Manager.gameObjects[x].image === i_playerBar) {
-							this.xDirection = this.xDirection * -1
 							this.ballCenterX = this.x + this.width / 2
 							this.ballCenterY = this.y + this.height / 2
 							this.barMeasure = g_Manager.gameObjects[x].height / 5
+							this.speed = this.speed + this.speedIncrease
 
 							if (this.ballCenterY >= g_Manager.gameObjects[x].y + this.barMeasure &&
 								this.ballCenterY <= g_Manager.gameObjects[x].y + g_Manager.gameObjects[x].height - this.barMeasure
@@ -92,23 +86,17 @@ function Ball () {
 								if (this.yDirection > 0) {this.yDirection = this.directionTemp}
 								else {this.yDirection = this.directionTemp * -1}
 							}
-
 							else {
 								if (this.ballCenterY < g_Manager.gameObjects[x].y + this.barMeasure * 2) {
 									this.yDirection = -(Math.random() * (1 - 0.5) + 0.5)}
 								else {this.yDirection = (Math.random() * (1 - 0.5) + 0.5)}
 							}
-
-							this.lastHit = g_Manager.gameObjects[x]
-							break
 						}
+						else {}
 
-						else {
-							console.log('misc')
-							this.xDirection = this.xDirection * -1
-							this.lastHit = g_Manager.gameObjects[x]
-							break
-						}
+						this.xDirection = this.xDirection * -1
+						this.lastHit = g_Manager.gameObjects[x]
+						break
 					}
 				}
 			}
@@ -118,19 +106,11 @@ function Ball () {
 
 
 			
-
-
-		// Y bounce update
-
 		if (this.y >= g_Manager.canvasHeight - 10 || this.y <= 0) {
-			// this.y = g_Manager.canvasHeight
+			if (this.y < 0) {this.y = 0}
+			else {this.y = g_Manager.canvasHeight - 10}
 			this.yDirection = this.yDirection * -1
 		}
-
-		// else if (this.y <= 0) {
-		// 	this.y = 0
-		// 	this.yDirection = this.yDirection * -1
-		// }
 
 		else if (this.x < - 50 || this.x > g_Manager.canvasWidth + 50) {
 			this.x = 400
@@ -138,16 +118,11 @@ function Ball () {
 			this.speed = 300
 			this.xDirection = -1
 			this.yDirection = 0
-			
 		}
-
 
 		if (this.speed > 600) {
-			
 			this.speed = 600
-
 		}
-		
 
 	}
 
