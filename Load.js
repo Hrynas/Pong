@@ -16,7 +16,7 @@ i_playerBar.src = "img/player_bar.jpg"
 
 
 var i_enemyBar = new Image()
-i_enemyBar.src = "img/middle_bar.jpg"
+i_enemyBar.src = "img/enemy_bar.jpg"
 
 var i_ball = new Image()
 i_ball.src = "img/ball.jpg"

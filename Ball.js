@@ -8,10 +8,10 @@ function Ball () {
 		this.zOrder = 0
 		this.height = 10
 		this.width = 10
-		this.xDirection = -1
-		this.yDirection = -1
+		this.xDirection = 1
+		this.yDirection = 0
 
-		this.speed = 200
+		this.speed = 300
 		this.lastHit = null
 
 		this.previousX = -100
@@ -53,9 +53,20 @@ function Ball () {
 						this.y <= g_Manager.gameObjects[x].y + g_Manager.gameObjects[x].height &&
 						this.lastHit !== g_Manager.gameObjects[x]
 					) {
-						this.xDirection = this.xDirection * -1
-						this.lastHit = g_Manager.gameObjects[x]
-						break
+
+						if (g_Manager.gameObjects[x].image === i_enemyBar) {
+							this.xDirection = this.xDirection * -1
+							this.directionTemp = (Math.random() * (0.5 - 0.1) + 0.1)
+							if (this.yDirection > 0) {this.yDirection = this.directionTemp}
+							else {this.yDirection = this.directionTemp * -1}
+							this.lastHit = g_Manager.gameObjects[x]
+							break
+						}
+						else {
+							this.xDirection = this.xDirection * -1
+							this.lastHit = g_Manager.gameObjects[x]
+							break
+						}
 					}
 				}
 
@@ -69,7 +80,6 @@ function Ball () {
 					) {
 
 						if (g_Manager.gameObjects[x].image === i_playerBar) {
-							
 							this.xDirection = this.xDirection * -1
 							this.ballCenterX = this.x + this.width / 2
 							this.ballCenterY = this.y + this.height / 2
@@ -85,8 +95,7 @@ function Ball () {
 
 							else {
 								if (this.ballCenterY < g_Manager.gameObjects[x].y + this.barMeasure * 2) {
-									this.yDirection = -(Math.random() * (1 - 0.5) + 0.5)
-								}
+									this.yDirection = -(Math.random() * (1 - 0.5) + 0.5)}
 								else {this.yDirection = (Math.random() * (1 - 0.5) + 0.5)}
 							}
 
@@ -95,6 +104,7 @@ function Ball () {
 						}
 
 						else {
+							console.log('misc')
 							this.xDirection = this.xDirection * -1
 							this.lastHit = g_Manager.gameObjects[x]
 							break
@@ -112,40 +122,31 @@ function Ball () {
 
 		// Y bounce update
 
-		if (this.y >= g_Manager.canvasHeight) {
-			this.y = g_Manager.canvasHeight
+		if (this.y >= g_Manager.canvasHeight - 10 || this.y <= 0) {
+			// this.y = g_Manager.canvasHeight
 			this.yDirection = this.yDirection * -1
 		}
 
-		else if (this.y <= 0) {
-			this.y = 0
-			this.yDirection = this.yDirection * -1
-		}
+		// else if (this.y <= 0) {
+		// 	this.y = 0
+		// 	this.yDirection = this.yDirection * -1
+		// }
 
-		else if (this.x < - 30) {
-			this.x = 350
-			this.y = g_Manager.canvasHeight/2
-			this.speed = 150
+		else if (this.x < - 50 || this.x > g_Manager.canvasWidth + 50) {
+			this.x = 400
+			this.y = 200
+			this.speed = 300
 			this.xDirection = -1
 			this.yDirection = 0
-			this.leftHit = false
-			this.rightHit = false
 			
 		}
 
-		else if (this.x > g_Manager.canvasWidth + 30) {
-			this.x = 350
-			this.y = g_Manager.canvasHeight/2
-			this.speed = 150
-			this.xDirection = -1
-			this.yDirection = 0
-			this.leftHit = false
-			this.rightHit = false
+
+		if (this.speed > 600) {
 			
+			this.speed = 600
 
 		}
-
-		// g_Manager.deleteCache.push(this.x, this.y)
 		
 
 	}

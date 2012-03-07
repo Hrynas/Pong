@@ -8,7 +8,7 @@ function EnemyBar () {
 		this.height = 50
 		this.width = 10
 
-		this.image = i_playerBar
+		this.image = i_enemyBar
 
 		this.bounceEnable = true
 
