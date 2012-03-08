@@ -15,27 +15,36 @@ function Ball () {
 		this.speedIncrease = 25
 		this.lastHit = null
 
-		this.previousX = -100
-		this.previousY = -100
-
+		this.dtMax = 0.03
 		this.image = i_ball
 
 		this.bounceEnable = false
 
 		g_Manager.addGameObject(this)
 
-
 	}
 
 
 	this.update = function () {
 		
-		
-		
-		// g_Manager.dt = 0.01
-					
-		this.x += g_Manager.dt * this.speed * this.xDirection
-		this.y += g_Manager.dt * this.speed * this.yDirection
+		this.dtBall = g_Manager.dt
+
+		if (this.dtBall < this.dtMax) {
+			this.x += this.dtBall * this.speed * this.xDirection
+			this.y += this.dtBall * this.speed * this.yDirection
+			this.callBallUpdate()
+		}
+		else {
+			while (this.dtBall > this.dtMax) {
+				this.x += this.dtMax * this.speed * this.xDirection
+				this.y += this.dtMax * this.speed * this.yDirection
+				this.callBallUpdate()
+				this.dtBall -= this.dtMax
+			}
+		}
+	}
+
+	this.callBallUpdate = function () {
 
 		for (x in g_Manager.gameObjects) {
 
@@ -49,7 +58,7 @@ function Ball () {
 						this.y <= g_Manager.gameObjects[x].y + g_Manager.gameObjects[x].height &&
 						this.lastHit !== g_Manager.gameObjects[x]
 					) {
-	
+		
 						if (g_Manager.gameObjects[x].image === i_enemyBar) {
 							this.directionTemp = (Math.random() * (0.5 - 0.1) + 0.1)
 							if (this.yDirection > 0) {this.yDirection = this.directionTemp}
@@ -102,10 +111,6 @@ function Ball () {
 			}
 		}
 
-
-
-
-			
 		if (this.y >= g_Manager.canvasHeight - 10 || this.y <= 0) {
 			if (this.y < 0) {this.y = 0}
 			else {this.y = g_Manager.canvasHeight - 10}
@@ -118,29 +123,20 @@ function Ball () {
 			this.speed = 300
 			this.xDirection = -1
 			this.yDirection = 0
+			this.lastHit = null
 		}
 
-		if (this.speed > 600) {
-			this.speed = 600
+		if (this.speed > 500) {
+			this.speed = 500
 		}
-
 	}
-
-
 
 
 	this.draw = function (context) {
 		
-		// 
-
 		context.drawImage(this.image, this.x, this.y)
 		
-
-
 	}	
-
-
-
 
 
 }

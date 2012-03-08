@@ -11,9 +11,6 @@ function Update() {
 
 	this.updateLoop = function () {
 
-
-
-
 		//clear canvas
 		// this.context.clearRect(0,0, g_Manager.canvas.width, g_Manager.canvas.height)
 		g_Manager.context.fillRect(0,0, g_Manager.canvas.width, g_Manager.canvas.height)
@@ -37,20 +34,7 @@ function Update() {
 		this.dt = (this.currentFrameTime - this.lastFrameTime) / 1000
 		this.lastFrameTime = this.currentFrameTime
 
-
-
-
-
-		//Update and draw
-
-		// for (var i = 0; i < this.deleteCache.length; i=i+2) {
-		// 	// console.log(this.deleteCache[i])
-		// 	this.context.clearRect(this.deleteCache[i],this.deleteCache[i+1], 10, 10)
-
-		// }
-		// this.deleteCache = new Array()
-		
-
+		// if (this.dt>0.03) {console.log(this.dt)}
 
 
 		for (x in this.gameObjects) {

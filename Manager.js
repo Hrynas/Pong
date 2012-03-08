@@ -30,10 +30,6 @@ function Manager () {
 		this.iFramesPerSecond = 0; 
 		this.fTotalSecondsLapsed = 0; 
 
-
-
-
-
 		
 		this.deleteCache = new Array()
 		
@@ -48,11 +44,6 @@ function Manager () {
 		setInterval('g_Manager.updateLoop()', 1000/this.iMaxFramesPerSecond)
 
 
-
-		
-
-
-
 	}
 
 
@@ -61,7 +52,6 @@ function Manager () {
 		
 		this.gameObjects.push(gameObject)
 		this.gameObjects.sort(function(a,b){return a.zOrder - b.zOrder;})
-		// this.gameObjects.sort()
 
 	}
 
