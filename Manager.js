@@ -41,6 +41,7 @@ function Manager () {
 
 
 
+
 		setInterval('g_Manager.updateLoop()', 1000/this.iMaxFramesPerSecond)
 
 
